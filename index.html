@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Patricia</title>
+    <!-- Google Fonts for Elegant Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #fff5f5;
+            --accent-color: #d4a373;
+            --text-dark: #2b2d42;
+            --text-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Elegant Particle Canvas Background --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('patricia4.jpeg') no-repeat center center/cover;
+            color: var(--text-light);
+            padding: 20px;
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* --- Section Styling --- */
+        section {
+            padding: 90px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        /* --- Personal Tribute Quote --- */
+        .tribute-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 60px;
+        }
+
+        /* --- Beautiful Big Paragraph Section --- */
+        .letter-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+        }
+
+        .letter-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #3d3f54;
+            font-weight: 300;
+            white-space: pre-line;
+        }
+
+        /* --- Bible Verses Section --- */
+        .verse-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .verse-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .verse-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .verse-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .verse-ref {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Photo Gallery (Masonry Style) --- */
+        .gallery-grid {
+            columns: 3 300px;
+            column-gap: 20px;
+            width: 100%;
+        }
+
+        .gallery-item {
+            width: 100%;
+            margin-bottom: 20px;
+            break-inside: avoid;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #777;
+            background-color: #fff;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music Element -->
+    <audio id="bg-music" loop>
+        <source src="Idea 22.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- --- START OF LOGIN PART --- -->
+    <div id="password-gate" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff5f5;
+        z-index: 99999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+    ">
+        <div style="
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        ">
+            <h2 style="color: #d4a373; margin-bottom: 20px; font-weight: 400; font-size: 1.5rem;">Enter the Secret Key</h2>
+            <input type="password" id="pass-input" placeholder="your name..." style="
+                width: 100%;
+                padding: 12px;
+                margin: 15px 0;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+                outline: none;
+                text-align: center;
+            ">
+            <button onclick="checkPassword()" style="
+                background-color: #d4a373;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.3s;
+                width: 100%;
+            ">Unlock</button>
+            <p id="error-msg" style="color: #e63946; margin-top: 15px; font-size: 0.9rem; display: none;">That's not patricia. Try again! ❤️</p>
+        </div>
+    </div>
+    <!-- --- END OF LOGIN PART --- -->
+
+    <!-- Canvas for Floating Particles Animation -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- 1. Hero Welcome Section -->
+    <header>
+        <h1 data-aos="fade-down" data-aos-duration="1500">Patricia</h1>
+        <p data-aos="fade-up" data-aos-duration="1500">The truest soul in my life</p>
+    </header>
+
+    <!-- 2. Message / Tribute Section -->
+    <section>
+        <h2 class="section-title" data-aos="fade-up">My Heart to Yours</h2>
+        <div class="tribute-box" data-aos="zoom-in" data-aos-duration="1000">
+            "Among all the people who have crossed my path, you shine the brightest. You are the truest, most genuine presence in my world, and I treat your heart as my greatest treasure. This space is a celebration of you, your faith, and the beautiful memories we share."
+        </div>
+    </section>
+
+    <!-- 3. Bible Verses Section -->
+    <section style="background-color: rgba(255, 255, 255, 0.6); border-radius: 30px;">
+        <h2 class="section-title" data-aos="fade-up">Words of Grace</h2>
+        <div class="verse-container">
+            
+            <div class="verse-card" data-aos="fade-up" data-aos-delay="100">
+                <p class="verse-text">"Many women do noble things, but you surpass them all."</p>
+                <p class="verse-ref">Proverbs 31:29</p>
+            </div>
+
+            <div class="verse-card" data-aos="fade-up" data-aos-delay="200">
+                <p class="verse-text">"I thank my God every time I remember you."</p>
+                <p class="verse-ref">Philippians 1:3</p>
+            </div>
+
+            <div class="verse-card" data-aos="fade-up" data-aos-delay="300">
+                <p class="verse-text">"No one has ever seen God; but if we love one another, God lives in us and his love is made complete in us."</p>
+                <p class="verse-ref">1 John 4:12</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. Dedicated Paragraph Section -->
+    <section>
+        <h2 class="section-title" data-aos="fade-up">A Promise to Keep</h2>
+        <div class="letter-container" data-aos="fade-up" data-aos-duration="1200">
+            <p class="letter-text">
+                Patricia, I know you might be shocked to see that I built an entire website about you. Honestly, I am so proud to do this because I wanted to try something completely unique. I know I could have just bought you a standard gift, but I wanted to give you something irreplaceable to show how special you are to me.
+
+                As our paths take us on different journeys in life, please know that you will always be the absolute shining star in my world. I know we won't be able to see each other most of the time, so please use this space to remember me whenever you need to. You are truly like an angel sent down to me; I have no one else in my life quite like you. You are amazing, Patricia, I love you so deeply, and I promise you that I always will.
+
+                I appreciate every single thing you have done for me. I have never met a person who notices and cares about the smallest things I do, always striving to make me happy. As you head off to university, I wish you nothing but the absolute best. I know we will still be talking all the time, but remember that if you ever need anything at all, I am always here for you. 
+
+                This website will stay with you until we become mothers (Inshallah) and eventually grandmas. I truly want you in my future. Everything feels so right when I am with you, and I love you with all my heart. More than a friend, I want to call you my sister—because friendships can end, but sisterhood can never be broken. 
+
+                This is Michelle Mnete, wishing all the very best to my sister, Patricia. 
+
+                With all my love and kind regards,
+                Michelle
+            </p>
+        </div>
+    </section>
+
+    <!-- 5. Pictures Gallery Section -->
+    <section>
+        <h2 class="section-title" data-aos="fade-up">Captured Moments</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia1.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia2.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia3.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia4.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia5.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia6.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia7.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia8.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia9.jpeg" alt="Patricia"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="patricia10.jpeg" alt="Patricia"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with love for Patricia • 2026</p>
+    </footer>
+
+
+    <!-- --- JAVASCRIPT FOR ANIMATIONS & BACKGROUND --- -->
+    
+    <!-- JS for Scroll Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true 
+        });
+    </script>
+
+    <!-- JS for Password & Music Logic -->
+    <script>
+        function checkPassword() {
+            const correctPassword = "patricia"; 
+            
+            const userInput = document.getElementById("pass-input").value;
+            const gate = document.getElementById("password-gate");
+            const error = document.getElementById("error-msg");
+            const music = document.getElementById("bg-music");
+
+            if (userInput.toLowerCase() === correctPassword.toLowerCase()) {
+                music.play().catch(err => {
+                    console.log("Audio play blocked until further user interaction.", err);
+                });
+
+                gate.style.transition = "opacity 0.5s ease";
+                gate.style.opacity = "0";
+                setTimeout(() => {
+                    gate.style.display = "none";
+                }, 500);
+            } else {
+                error.style.display = "block";
+                document.getElementById("pass-input").value = ""; 
+            }
+        }
+
+        document.getElementById("pass-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+
+    <!-- JS for Smooth Floating Particles Background -->
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        initCanvas();
+        window.addEventListener('resize', initCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 4 + 1; 
+                this.speedY = Math.random() * 1 + 0.3; 
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                if (this.y < -10) {
+                    this.y = canvas.height + 10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(212, 163, 115, ${this.opacity})`; 
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function generateParticles() {
+            particlesArray = [];
+            let numberOfParticles = 40; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        generateParticles();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
